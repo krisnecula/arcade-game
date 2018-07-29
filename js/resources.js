@@ -6,7 +6,7 @@
  */
 (function() {
     var resourceCache = {};
-    var loading = [];
+    // var loading = [];
     var readyCallbacks = [];
 
     /* This is the publicly accessible image loading function. It accepts
@@ -15,18 +15,10 @@
      */
     function load(urlOrArr) {
         if(urlOrArr instanceof Array) {
-            /* If the developer passed in an array of images
-             * loop through each value and call our image
-             * loader on that image file
-             */
             urlOrArr.forEach(function(url) {
                 _load(url);
             });
         } else {
-            /* The developer did not pass an array to this function,
-             * assume the value is a string and call our image loader
-             * directly.
-             */
             _load(urlOrArr);
         }
     }
@@ -51,7 +43,7 @@
                  * so that we can simply return this image if the developer
                  * attempts to load this file in the future.
                  */
-                resourceCache[url] = img;
+                resourceCache[url] = img; //new keyset is passed into img
 
                 /* Once the image is actually loaded and properly cached,
                  * call all of the onReady() callbacks we have defined.
