@@ -34,9 +34,13 @@ Enemy.prototype.render = function() {
 // Player class
 class Hero {
   constructor() { // constructor and its properties
-    this.x = 0; // x pos
-    this.y = 0; // y pos
     this.sprite = 'images/char-horn-girl.png'; // sprite image
+    this.step = 101; // distance between blocks on x axis
+    this.jump = 83; // distance between blocks on y axis
+    this.startX = this.step * 2; // reference point to starting x pos
+    this.startY = (this.jump * 5) - 20; // reference point to centered starting y pos
+    this.x = this.startX; // x pos
+    this.y = this.startY; // y pos
   }
     // Methods
       // update() to update the position of the player
@@ -49,9 +53,30 @@ class Hero {
         render() {
           ctx.drawImage(Resources.get(this.sprite), this.x, this.y); // call the drawImage method from ctx
         }
-}
-      // handleInput() method.
-        // the event listener will fire this method and update x & y coord according to key input
+        /*
+         * handleInput is attached to the event listener
+         * and will update x & y coord according to key input
+         * @param {string} input - direction to travel
+         * checks the value of the input and moves player
+         */
+      handleInput(input) {
+        switch(input) {
+          case 'left':
+            this.x -= this.step;
+            break;
+          case 'up':
+            this.y -= this.jump;
+            break;
+          case 'right':
+            this.x += this.step;
+            break;
+          case 'down':
+            this.y += this.jump;
+            break;
+        }
+
+      }
+  }
       // Reset Player
         // set x and y to starting x and y
 
