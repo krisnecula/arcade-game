@@ -62,17 +62,25 @@ class Hero {
       handleInput(input) {
         switch(input) {
           case 'left':
-            this.x -= this.step;
-            break;
+            if (this.x > 0) { // conditional checks if player's x property is greater than zero
+            this.x -= this.step; // if so, continue left
+          }
+            break; // stops movement at left edge of board
           case 'up':
+            if (this.y > this.jump) { // conditional checks if player's y property is one less than block height
             this.y -= this.jump;
+          }
             break;
           case 'right':
-            this.x += this.step;
-            break;
+            if (this.x < this.step * 4) { // conditional checks if player's x property is less than 4 steps
+            this.x += this.step; // if so, continue right
+            }
+            break; // at 4 steps stop movement at right edge of board
           case 'down':
-            this.y += this.jump;
-            break;
+            if (this.y < this.jump * 4) { // conditional checks if player's y property is less than 4 steps
+            this.y += this.jump; // if so, continue down
+            }
+            break; // at 4 steps stop movement at bottom part of board
         }
 
       }
