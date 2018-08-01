@@ -1,5 +1,4 @@
-/*
- * Enemy variable
+/* Enemy variable:
  * @param {string} x,y,speed - gives individual enemies
  * an intial x and y pos and creates speed variation
  */
@@ -12,54 +11,71 @@ var Enemy = function(x,y,speed) {
     this.boundary = this.step * 5; // takes enemy past the boundary
     this.resetPos = -this.step;
 };
-        /*
-         * Update the enemy's position:
-         * automate enemy movement if enemy is not
-         * passed the boundary of the screen edge
-         * @param {string} dt - a time delta between ticks
-         */
+/*
+ * Update the enemy's position:
+ * automate enemy movement if enemy is not
+ * passed the boundary of the screen edge
+ * @param {string} dt - a time delta between ticks
+ */
 Enemy.prototype.update = function(dt) {
-      if(this.x < this.boundary) { // conditional checks if enemy's x property is less this.boundary
+      if(this.x < this.boundary) { // conditional checks enemy's x property
       this.x += this.speed * dt; // increment x by speed * dt to move forward
       }
     else {
       this.x = this.resetPos // reset x pos to start
     }
 };
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+/*
+ * Render enemy to screen:
+ * with anonymous function
+ */
+ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-
-// Player class
+/*
+ * Player class:
+ * with constructor function
+ */
 class Hero {
-  constructor() { // constructor and its properties
+  constructor() {
     this.sprite = 'images/char-horn-girl.png'; // sprite image
     this.step = 101; // distance between blocks on x axis
     this.jump = 83; // distance between blocks on y axis
     this.startX = this.step * 2; // reference point to starting x pos
-    this.startY = (this.jump * 5) - 20; // reference point to centered starting y pos
+    this.startY = (this.jump * 4) + 55; // reference point to centered starting y pos
     this.x = this.startX; // x pos
     this.y = this.startY; // y pos
   }
-    // Methods
-      // update() to update the position of the player
-        // check for collision
-          // did player x and y collide with the enemy?
+/*
+ * Class methods:
+ * update will loop through each enemy in the allEnemies array
+ * and check for a collision
+ * reset will send player back to starting coordinates
+ * if collision logic is true
+ * render will render player to screen
+ */
+      update() {
+        for(let enemy of allEnemies) {
+          if (this.y === enemy.y && (enemy.x + enemy.step/2 > this.x && enemy.x < this.x + this.step/2)) {
+          this.reset();
+        }
+    }
+}
+      reset () {
+        this.y = this.startY;
+        this.x = this.startX;
+      }
         // check for win
           // did player win the game?
-      // render() to draw/redraw the player to the board every loop through the main game loop
-        // draw player sprite on current x and y coord position
-        render() {
-          ctx.drawImage(Resources.get(this.sprite), this.x, this.y); // call the drawImage method from ctx
+      render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
         }
-        /*
-         * handleInput is attached to the event listener
-         * and will update x & y coord according to key input
-         * @param {string} input - direction to travel
-         * checks the value of the input and moves player
-         */
+/*
+ * handleInput is attached to the event listener
+ * and will update x & y coord according to key input
+ * @param {string} input - direction to travel
+ * checks the value of the input and moves player
+ */
       handleInput(input) {
         switch(input) {
           case 'left':
@@ -93,8 +109,8 @@ class Hero {
 // New Player object
 const player = new Hero();
 const bug1 = new Enemy(-101, 0, 200);
-const bug2 = new Enemy(-101, 83, 350);
-const bug3 = new Enemy((-101*2.5), 83, 350);
+const bug2 = new Enemy(-101, 83, 300);
+const bug3 = new Enemy((-101*2.5), 83, 300);
 const allEnemies = []; // init allEnemies array
 allEnemies.push(bug1, bug2, bug3); // for each enemy class push the new Enemy object into above array
 
