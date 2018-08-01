@@ -1,23 +1,25 @@
-// Enemies our player must avoid
+// Enemy variable
 var Enemy = function() {
     this.x = 0;
-    this.y = 0; 
+    this.y = 50; // places enemy on road
     this.sprite = 'images/enemy-bug.png';
+    this.step = 101;
+    this.boundary = this.step * 5; // takes enemy past the boundary
+    this.resetPos = -this.step;
 };
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+        /*
+         * Update the enemy's position:
+         * automate enemy movement if enemy is not
+         * passed the boundary of the screen edge
+         * @param {string} dt - a time delta between ticks
+         */
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-
-    // code to automate enemy movement:
-    // if enemy is not pass the boundary of the screen edge
-      // move forward
-      // increment x by speed * dt
-    // else
-      // reset pos to start
+      if(this.x < this.boundary) { // conditional checks if enemy's x property is less this.boundary
+      this.x += 200 * dt; // increment x by speed * dt to move forward
+      }
+    else {
+      this.x = this.resetPos // reset x pos to start
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -85,9 +87,9 @@ class Hero {
 
 // New Player object
 const player = new Hero();
-
-// Init allEnemies array
-// For each enemy class push the new Enemy object into above array
+const bug1 = new Enemy();
+const allEnemies = []; // init allEnemies array
+allEnemies.push(bug1); // for each enemy class push the new Enemy object into above array
 
 
 
