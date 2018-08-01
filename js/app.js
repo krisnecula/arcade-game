@@ -1,7 +1,12 @@
-// Enemy variable
-var Enemy = function() {
-    this.x = 0;
-    this.y = 50; // places enemy on road
+/*
+ * Enemy variable
+ * @param {string} x,y,speed - gives individual enemies
+ * an intial x and y pos and creates speed variation
+ */
+var Enemy = function(x,y,speed) {
+    this.x = x;
+    this.y = y + 55; // places enemy on road
+    this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
     this.step = 101;
     this.boundary = this.step * 5; // takes enemy past the boundary
@@ -15,7 +20,7 @@ var Enemy = function() {
          */
 Enemy.prototype.update = function(dt) {
       if(this.x < this.boundary) { // conditional checks if enemy's x property is less this.boundary
-      this.x += 200 * dt; // increment x by speed * dt to move forward
+      this.x += this.speed * dt; // increment x by speed * dt to move forward
       }
     else {
       this.x = this.resetPos // reset x pos to start
@@ -87,9 +92,11 @@ class Hero {
 
 // New Player object
 const player = new Hero();
-const bug1 = new Enemy();
+const bug1 = new Enemy(-101, 0, 200);
+const bug2 = new Enemy(-101, 83, 350);
+const bug3 = new Enemy((-101*2.5), 83, 350);
 const allEnemies = []; // init allEnemies array
-allEnemies.push(bug1); // for each enemy class push the new Enemy object into above array
+allEnemies.push(bug1, bug2, bug3); // for each enemy class push the new Enemy object into above array
 
 
 
