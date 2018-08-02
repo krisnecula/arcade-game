@@ -33,4 +33,5 @@ TBA
 
 ## Remaining Bugs
 
-TBA
+* Triggering modal 
+* Replay button

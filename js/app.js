@@ -45,6 +45,7 @@ class Hero {
     this.startY = (this.jump * 4) + 55; // reference point to centered starting y pos
     this.x = this.startX; // x pos
     this.y = this.startY; // y pos
+    this.victory = false;
   }
 /*
  * Class methods:
@@ -55,17 +56,19 @@ class Hero {
  * render will render player to screen
  */
       update() {
-        for(let enemy of allEnemies) {
+        for (let enemy of allEnemies) {
           if (this.y === enemy.y && (enemy.x + enemy.step/2 > this.x && enemy.x < this.x + this.step/2)) {
           this.reset();
         }
+    }
+    if (this.y === 55) {
+      this.victory = true;
     }
 }
       reset () {
         this.y = this.startY;
         this.x = this.startX;
       }
-        // check for win
           // did player win the game?
       render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -102,22 +105,20 @@ class Hero {
 
       }
   }
-      // Reset Player
-        // set x and y to starting x and y
-
-
-// New Player object
+/*
+ * New player object:
+ */
 const player = new Hero();
 const bug1 = new Enemy(-101, 0, 200);
 const bug2 = new Enemy(-101, 83, 300);
 const bug3 = new Enemy((-101*2.5), 83, 300);
 const allEnemies = []; // init allEnemies array
 allEnemies.push(bug1, bug2, bug3); // for each enemy class push the new Enemy object into above array
-
-
-
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+/*
+ * Event listener for key presses:
+ * sends the keys to the
+ * player.handleInput() method.
+ */
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
