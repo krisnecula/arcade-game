@@ -24,17 +24,25 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime,
         id;
-    const modal = document.querySelector('modal-bg');
-    const replay = document.querySelector('.replay');
+
+        const modal = document.querySelector('.modal-bg');
+        const replay = document.querySelector('.btn');
     /* Event listener:
      * for the replay button in the modal.
      */
-  //   replay.addEventListener("click", function() {
-//      modal.classlist.toggle('hide'); // toggles modal off
-//      player.reset(); // resets player back to start
-//      player.victory = false; // sets victory condition to false for a new game
-//      win.requestAnimationFrame(main); // restart main loop
-//    });
+
+      replay.addEventListener('click', function() {
+      modal.classList.toggle('hide');
+      player.reset();
+      player.victory = false;
+      win.requestAnimationFrame(main);
+    });
+    // replay.addEventListener('click', function() {
+    // modal.classList.toggle('hide'); // toggles modal off
+    // player.reset(); // resets player back to start
+    // player.victory = false; // sets victory condition to false for a new game
+    // win.requestAnimationFrame(main); // restart main loop
+    // });
 
     canvas.width = 505;
     canvas.height = 606;
@@ -69,7 +77,7 @@ var Engine = (function(global) {
          */
         if (player.victory === true) { // trigger cancelAnimationFrame of the id
             win.cancelAnimationFrame(id);
-            modal.classlist.toggle('hide');
+            modal.classList.toggle('hide');
         }
         else { // only trigger next animation frame is victory is NOT true
             id = win.requestAnimationFrame(main);

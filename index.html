@@ -2,24 +2,25 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aracde Game Project</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
-
-<!-- Added replay modal to game  -->
+<!-- modal start  -->
 <div class="modal-bg hide">
   <div class="modal-body">
     <div class="modal-content">
       <h1 class="modal-title">Game Over</h1>
-      <div class="modal-btns">
-        <button class="modal-btn replay">Replay</button>
-      </div>
+        <button class="btn">Replay</button>
     </div>
   </div>
 </div>
+<!-- modal end  -->
+
+<!-- place js bundle below modal! elements needs to load before modal scripts can execute!  -->
+<script src="js/resources.js"></script>
+<script src="js/app.js"></script>
+<script src="js/engine.js"></script>
 </body>
 </html>

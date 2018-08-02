@@ -1,6 +1,6 @@
 /* Enemy variable:
  * @param {string} x,y,speed - gives individual enemies
- * an intial x and y pos and creates speed variation
+ * an intial x and y pos and creates speed variation.
  */
 var Enemy = function(x,y,speed) {
     this.x = x;
@@ -14,7 +14,7 @@ var Enemy = function(x,y,speed) {
 /*
  * Update the enemy's position:
  * automate enemy movement if enemy is not
- * passed the boundary of the screen edge
+ * passed the boundary of the screen edge.
  * @param {string} dt - a time delta between ticks
  */
 Enemy.prototype.update = function(dt) {
@@ -50,9 +50,9 @@ class Hero {
 /*
  * Class methods:
  * update will loop through each enemy in the allEnemies array
- * and check for a collision
+ * and check for a collision.
  * reset will send player back to starting coordinates
- * if collision logic is true
+ * if collision logic is true.
  * render will render player to screen
  */
       update() {
@@ -69,15 +69,14 @@ class Hero {
         this.y = this.startY;
         this.x = this.startX;
       }
-          // did player win the game?
       render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
         }
 /*
  * handleInput is attached to the event listener
- * and will update x & y coord according to key input
+ * and will update x & y coord according to key input.
  * @param {string} input - direction to travel
- * checks the value of the input and moves player
+ * checks the value of the input and moves player.
  */
       handleInput(input) {
         switch(input) {
@@ -109,11 +108,12 @@ class Hero {
  * New player object:
  */
 const player = new Hero();
-const bug1 = new Enemy(-101, 0, 200);
+const bug1 = new Enemy(-101, 0, 200); // coordinates and speed
 const bug2 = new Enemy(-101, 83, 300);
 const bug3 = new Enemy((-101*2.5), 83, 300);
+const bug4 = new Enemy(-101, 163, 350);
 const allEnemies = []; // init allEnemies array
-allEnemies.push(bug1, bug2, bug3); // for each enemy class push the new Enemy object into above array
+allEnemies.push(bug1, bug2, bug3, bug4); // for each enemy class push the new Enemy object into above array
 /*
  * Event listener for key presses:
  * sends the keys to the
