@@ -1,3 +1,4 @@
+"use strict";
 /* Enemy variable:
  * @param {string} x,y,speed - gives individual enemies
  * an intial x and y pos and creates speed variation.
@@ -61,10 +62,10 @@ class Hero {
           this.reset();
         }
     }
-    if (this.y === 55) {
-      this.victory = true;
+        if (this.y < 40) {
+          this.victory = true;
     }
-}
+  }
       reset () {
         this.y = this.startY;
         this.x = this.startX;
@@ -81,17 +82,17 @@ class Hero {
       handleInput(input) {
         switch(input) {
           case 'left':
-            if (this.x > 0) { // conditional checks if player's x property is greater than zero
+            if (this.x > 0) { // conditional checks if player's x pos is greater than zero
             this.x -= this.step; // if so, continue left
           }
             break; // stops movement at left edge of board
           case 'up':
-            if (this.y > this.jump) { // conditional checks if player's y property is one less than block height
+            if (this.y > 40) { // conditional checks if player's y pos is at top of board
             this.y -= this.jump;
           }
-            break;
+            break; // stops movement at top of board
           case 'right':
-            if (this.x < this.step * 4) { // conditional checks if player's x property is less than 4 steps
+            if (this.x < this.step * 4) { // conditional checks if player's x pos is less than 4 steps
             this.x += this.step; // if so, continue right
             }
             break; // at 4 steps stop movement at right edge of board
@@ -111,7 +112,7 @@ const player = new Hero();
 const bug1 = new Enemy(-101, 0, 200); // coordinates and speed
 const bug2 = new Enemy(-101, 83, 300);
 const bug3 = new Enemy((-101*2.5), 83, 300);
-const bug4 = new Enemy(-101, 163, 350);
+const bug4 = new Enemy(-101, 2 * 83, 350); // make sure y pos is a multiple of 83 to make collision logic on line 61 true
 const allEnemies = []; // init allEnemies array
 allEnemies.push(bug1, bug2, bug3, bug4); // for each enemy class push the new Enemy object into above array
 /*

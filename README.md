@@ -33,7 +33,8 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 ## Acknowledgments
 
 * [Matthew Cranford's Tutorial](https://matthewcranford.com/category/blog-posts/walkthrough/arcade-game/)
+* Udacity's review team ✨
 
 ## Remaining Bugs
 
-* First enemy collision
+* ~First enemy collision~ Resolved
